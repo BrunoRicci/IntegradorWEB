@@ -1,0 +1,160 @@
+<!doctype html>
+
+
+<html lang="en">
+<head>
+        <!-- Bootstrap core CSS -->
+		 <link href="bootstrap.css" rel="stylesheet" >	<!--HAY PROBLEMAS AL IMPORTAR EL ARCHIVO CSS!!  -->
+		<!--<link rel="stylesheet" href="C:\Users\BRUNO - PC\PycharmProjects\IntegradorWEB\bootstrap.css">	-->
+		<!-- Favicons -->
+</head>
+<style>
+	.cont{
+		//.container-fluid;
+		position:absolute;
+
+		padding:5%;
+		//overflow:auto;
+		
+		text-align:center;
+		border: 2px solid gray;
+	}
+	
+	.center{
+		left:50%;
+		top:50%;
+		transform: translate(-50%, -50%);
+	}
+	
+	.mesa{
+		width:100px;
+		height:100px;
+		margin:3%;
+		border-radius:10px;
+		border: 2px solid #9c7248;
+		//background:#E8E8E8;
+		background:#99ffa0;
+	}
+</style>
+	
+<script>
+	
+
+	function clickMesa(obj, value) {
+		
+		//setEstadoMesa(obj, 1)
+		updateHub(value)
+		
+	//document.getElementById(obj).style.backgroundColor = "lightblue";
+	//document.getElementById(obj).innerHTML = document.getElementById(obj).style.backgroundColor;
+
+	
+	
+	
+	//Oculta el menú de mesa...
+	//document.getElementById("HUB").style.display = "none";
+
+	//document.getElementById("HUB").innerHTML = "none";
+	
+    //document.getElementById(obj).style.display = "block";
+	}
+	
+
+	
+	function setEstadoMesa(mesa, state){
+		
+		if (state == 0){		//Si está disponible --> Verde
+			document.getElementById(mesa).style.backgroundColor = "#99ffa0";
+		}
+		else if (state == 1){	//Si está ocupada --> Rojo
+			document.getElementById(mesa).style.backgroundColor = "red";
+		}
+		else if (state == 2){	//Si está ocupada --> Gris
+			document.getElementById(mesa).style.backgroundColor = "gray";
+		}
+	
+	}
+	
+	function updateHub(num_mesa){
+		//Modifica el contenido del hub con los de la mesa seleccionada.
+		  
+		  console.log('num_mesa ='+num_mesa);
+		  
+		  var xhttp;
+		  if (num_mesa == "") {
+			document.getElementById("hub").innerHTML = "";
+			return;
+		  }
+		  xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				console.log(this.responseText);
+				document.getElementById("hub").innerHTML = this.responseText;
+			}
+		  };
+		  xhttp.open("GET", "getMesa?id_mesa="+num_mesa, true);
+		  xhttp.send();
+		
+	}
+
+
+</script>	
+
+<body>
+	
+<div style="border: " type="container">
+		
+		
+
+	<button id="mesa_1" onclick="clickMesa('mesa_1', 1)" type="button" class="btn mesa">1</button>
+	<button id="mesa_2" onclick="clickMesa('mesa_2', 2)" type="button" class="btn mesa">2</button>
+	<button id="mesa_3" onclick="clickMesa('mesa_3', 3)" type="button" class="btn mesa">3</button>
+	<br>
+	<button id="mesa_4" onclick="clickMesa('mesa_4', 4)" type="button" class="btn mesa">4</button>
+	<button id="mesa_5" onclick="clickMesa('mesa_5', 5)" type="button" class="btn mesa">5</button>
+	<button id="mesa_6" onclick="clickMesa('mesa_6', 6)" type="button" class="btn mesa">6</button>
+	<br>
+	<button id="mesa_7" onclick="clickMesa('mesa_7', 7)" type="button" class="btn mesa">7</button>
+	<button id="mesa_8" onclick="clickMesa('mesa_8', 8)" type="button" class="btn mesa">8</button>
+	<button id="mesa_9" onclick="clickMesa('mesa_9', 9)" type="button" class="btn mesa">9</button>
+	
+	
+	
+<div type="container" id="hub" style="left:10px; border: 2px solid black; width:400px;height:800px;">
+	
+	<!--
+	<div class="form-popup"  style="font-size:40px">
+	   
+	   <text id="hub"> HUB dassad</text>  
+
+	</div>
+	-->
+ 
+
+	
+</div>	
+	
+	
+
+ 
+
+	
+	
+	
+	
+	
+	
+	
+</body>			
+
+</html>
+
+
+
+
+
+
+
+
+
+
